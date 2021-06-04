@@ -1,10 +1,12 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
+import java.util.Queue;
 
 public class Graph<T> {
-  public GraphNode[] nodes;
 
   // We use Hashmap to store the edges in the graph
   private final Map<T, List<T> > map = new HashMap<>();
@@ -99,6 +101,57 @@ public class Graph<T> {
     }
 
     return (builder.toString());
+  }
+
+  //Depth-First Search
+  public void searchDFS(){
+    System.out.println("Start travers using Depth-First Search...");
+    Set<T> visited = new HashSet<T>();
+    for(T vertex : map.keySet()){
+      searchDFS(vertex, visited);
+    }
+  }
+  //Depth-First Search
+  private void searchDFS(T source, Set<T> visited){
+    if(source==null || visited.contains(source)) return;
+      visit(source);
+      visited.add(source);
+    for (T neighbor: map.get(source)) {
+      if(!visited.contains(neighbor))
+        searchDFS(neighbor, visited);
+    }
+  }
+
+  //Breadth-First Search
+  public void searchBFS(){
+    System.out.println("Start travers using Breadth-First Search...");
+    Set<T> visited = new HashSet<T>();
+    for(T vertex : map.keySet()){
+      searchBFS(vertex, visited);
+    }
+  }
+  //Breadth-First Search
+  private void searchBFS(T source, Set<T> visited){
+    MyQueue<T> queue = new MyQueue<T>();
+    if(source==null || visited.contains(source)) return;
+
+    queue.add(source);
+
+    while(!queue.isEmpty()){
+      T node = queue.remove();
+      visit(node);
+      for (T neighbor : map.get(node)) {
+        if(!visited.contains(neighbor)) {
+          visited.add(neighbor);
+          queue.add(neighbor);
+        }
+      }
+    }
+  }
+
+
+  private void visit(T vertex){
+    System.out.println("Visited: " + vertex.toString());
   }
 }
 

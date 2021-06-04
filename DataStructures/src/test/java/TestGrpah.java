@@ -9,13 +9,13 @@ public class TestGrpah {
     // edges are added.
     // Since the graph is bidirectional,
     // so boolean bidirectional is passed as true.
-    g.addEdge(0, 1, true);
-    g.addEdge(0, 4, true);
-    g.addEdge(1, 2, true);
-    g.addEdge(1, 3, true);
-    g.addEdge(1, 4, true);
-    g.addEdge(2, 3, true);
-    g.addEdge(3, 4, true);
+    g.addEdge(0, 1, false);
+    g.addEdge(0, 4, false);
+    g.addEdge(1, 2, false);
+    g.addEdge(1, 3, false);
+    g.addEdge(1, 4, false);
+    g.addEdge(2, 3, false);
+    g.addEdge(3, 4, false);
 
     // print the graph.
     System.out.println("Graph:\n"
@@ -32,5 +32,8 @@ public class TestGrpah {
 
     // tells whether vertex is present or not
     g.hasVertex(5);
+
+    g.searchDFS();
+    g.searchBFS();
   }
 }
